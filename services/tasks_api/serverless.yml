@@ -12,6 +12,23 @@ provider:
   logRetentionInDays: 30
   environment:
     APP_ENVIRONMENT: ${self:provider.stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DescribeTable
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          # Allow only access to the API's table and its indexes
+          Resource:
+            - "Fn::GetAtt": [ TasksAPITable, Arn ]
+            - "Fn::Join": ['/', ["Fn::GetAtt": [ TasksAPITable, Arn ], 'index', '*']]
+
 
 functions:
   API:
@@ -33,6 +50,11 @@ custom:
     noDeploy:
       - boto3  # already on Lambda
       - botocore  # already on Lambda
+  stage: ${opt:stage, self:provider.stage}
+  tableName: ${self:custom.stage}-tasks-api
 
 plugins:
   - serverless-python-requirements
+
+resources:
+  - ${file(resources/dynamodb.yml)}
