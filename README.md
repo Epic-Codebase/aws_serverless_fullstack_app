@@ -26,3 +26,9 @@ You need to set AWS_DEFAULT_REGION environment variable since Boto3 requires it 
 $ export AWS_DEFAULT_REGION=eu-west-1
 $ poetry run pytest tests.py
 ```
+
+## Creating the DynamoDB and running the server locally
+
+export AWS_ACCESS_KEY_ID=abc && export AWS_SECRET_ACCESS_KEY=abc && export AWS_DEFAULT_REGION=eu-west-1 && export TABLE_NAME="local-tasks-api-table" && export DYNAMODB_URL=http://localhost:9999
+poetry run python create_dynamodb_locally.py
+poetry run uvicorn main:app --reload
