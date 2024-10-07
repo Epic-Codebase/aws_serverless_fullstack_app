@@ -1,6 +1,6 @@
 service: tasks-api
 
-frameworkVersion: '3'
+frameworkVersion: '4'
 useDotenv: true
 
 
