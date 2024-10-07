@@ -66,3 +66,23 @@ sudo chown -R $user: docker
 ```
 
 Where `$user` is your Docker user.
+
+## Testing the server
+
+# Create a task:
+
+```bash
+$ curl --location --request POST 'http://localhost:8000/api/create-task' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2duaXRvOnVzZXJuYW1lIjoiam9obkBkb2UuY29tIn0.6UvNP3lIrXAinXYqH4WzyNrYCxUFIRhAluWyAxcCoUc' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "title": "Jump"
+}'
+```
+
+# List open tasks:
+
+```bash
+curl --location --request GET 'http://localhost:8000/api/open-tasks' \
+--header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2duaXRvOnVzZXJuYW1lIjoiam9obkBkb2UuY29tIn0.6UvNP3lIrXAinXYqH4WzyNrYCxUFIRhAluWyAxcCoUc'
+```
