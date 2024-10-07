@@ -1,0 +1,38 @@
+service: tasks-api
+
+frameworkVersion: '3'
+useDotenv: true
+
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: ${opt:region, 'eu-west-1'}
+  stage: ${opt:stage, 'development'}
+  logRetentionInDays: 30
+  environment:
+    APP_ENVIRONMENT: ${self:provider.stage}
+
+functions:
+  API:
+    handler: main.handle
+    timeout: 10
+    memorySize: 512
+    events:
+      - http:
+          path: /{proxy+}
+          method: any
+          cors:
+            origin: ${env:ALLOWED_ORIGINS}
+            maxAge: 60
+
+
+custom:
+  pythonRequirements:
+    usePoetry: true
+    noDeploy:
+      - boto3  # already on Lambda
+      - botocore  # already on Lambda
+
+plugins:
+  - serverless-python-requirements
