@@ -6,12 +6,13 @@ useDotenv: true
 
 provider:
   name: aws
-  runtime: python3.11
+  runtime: python3.9
   region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'development'}
   logRetentionInDays: 30
   environment:
     APP_ENVIRONMENT: ${self:provider.stage}
+    TABLE_NAME: ${self:custom.tableName}
   iam:
     role:
       statements:

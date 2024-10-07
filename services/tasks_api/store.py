@@ -77,4 +77,5 @@ class TaskStore:
             last_key = response.get("LastEvaluatedKey")
             if last_key is None:
                 break
+
         return tasks
