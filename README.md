@@ -32,3 +32,32 @@ $ poetry run pytest tests.py
 export AWS_ACCESS_KEY_ID=abc && export AWS_SECRET_ACCESS_KEY=abc && export AWS_DEFAULT_REGION=eu-west-1 && export TABLE_NAME="local-tasks-api-table" && export DYNAMODB_URL=http://localhost:9999
 poetry run python create_dynamodb_locally.py
 poetry run uvicorn main:app --reload
+
+If you see following error, you only need to give your user the rights of the folder:
+
+dynamodb-local  | Oct 07, 2024 8:25:37 PM com.almworks.sqlite4java.Internal log
+dynamodb-local  | WARNING: [sqlite] SQLiteQueue[shared-local-instance.db]: stopped abnormally, reincarnating in 3000ms
+dynamodb-local  | Oct 07, 2024 8:25:40 PM com.almworks.sqlite4java.Internal log
+dynamodb-local  | WARNING: [sqlite] cannot open DB[2]: com.almworks.sqlite4java.SQLiteException: [14] unable to open database file
+dynamodb-local  | Oct 07, 2024 8:25:40 PM com.almworks.sqlite4java.Internal log
+dynamodb-local  | SEVERE: [sqlite] SQLiteQueue[shared-local-instance.db]: error running job queue
+dynamodb-local  | com.almworks.sqlite4java.SQLiteException: [14] unable to open database file
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteConnection.open0(SQLiteConnection.java:1480)
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteConnection.open(SQLiteConnection.java:282)
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteConnection.open(SQLiteConnection.java:293)
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteQueue.openConnection(SQLiteQueue.java:464)
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteQueue.queueFunction(SQLiteQueue.java:641)
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteQueue.runQueue(SQLiteQueue.java:623)
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteQueue.access$000(SQLiteQueue.java:77)
+dynamodb-local  | 	at com.almworks.sqlite4java.SQLiteQueue$1.run(SQLiteQueue.java:205)
+dynamodb-local  | 	at java.base/java.lang.Thread.run(Thread.java:840)
+dynamodb-local  | 
+dynamodb-local  | Oct 07, 2024 8:25:40 PM com.almworks.sqlite4java.Internal log
+dynamodb-local  | WARNING: [sqlite] SQLiteQueue[shared-local-instance.db]: stopped abnormally, reincarnating in 3000ms
+
+
+```bash
+sudo chown -R $user: docker
+```
+
+Where `$user` is your Docker user.
