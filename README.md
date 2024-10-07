@@ -69,7 +69,7 @@ Where `$user` is your Docker user.
 
 ## Testing the server
 
-# Create a task:
+### Create a task:
 
 ```bash
 $ curl --location --request POST 'http://localhost:8000/api/create-task' \
@@ -80,7 +80,7 @@ $ curl --location --request POST 'http://localhost:8000/api/create-task' \
 }'
 ```
 
-# List open tasks:
+### List open tasks:
 
 ```bash
 curl --location --request GET 'http://localhost:8000/api/open-tasks' \
