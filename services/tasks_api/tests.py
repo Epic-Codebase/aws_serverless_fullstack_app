@@ -174,10 +174,7 @@ def test_list_closed_tasks(client, user_email, id_token):
         headers={"Authorization": id_token},
     )
 
-    response = client.get(
-        "/api/closed-tasks",
-        headers={"Authorization": id_token}
-    )
+    response = client.get("/api/closed-tasks", headers={"Authorization": id_token})
     body = response.json()
 
     assert response.status_code == status.HTTP_200_OK
