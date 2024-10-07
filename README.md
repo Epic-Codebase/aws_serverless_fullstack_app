@@ -1,4 +1,4 @@
-# was_tasks
+# aws_tasks
 
 ## Infrastructure
 
@@ -29,12 +29,15 @@ $ poetry run pytest tests.py
 
 ## Creating the DynamoDB and running the server locally
 
+```bash
 export AWS_ACCESS_KEY_ID=abc && export AWS_SECRET_ACCESS_KEY=abc && export AWS_DEFAULT_REGION=eu-west-1 && export TABLE_NAME="local-tasks-api-table" && export DYNAMODB_URL=http://localhost:9999
 poetry run python create_dynamodb_locally.py
 poetry run uvicorn main:app --reload
+```
 
 If you see following error, you only need to give your user the rights of the folder:
 
+```
 dynamodb-local  | Oct 07, 2024 8:25:37 PM com.almworks.sqlite4java.Internal log
 dynamodb-local  | WARNING: [sqlite] SQLiteQueue[shared-local-instance.db]: stopped abnormally, reincarnating in 3000ms
 dynamodb-local  | Oct 07, 2024 8:25:40 PM com.almworks.sqlite4java.Internal log
@@ -54,7 +57,9 @@ dynamodb-local  | 	at java.base/java.lang.Thread.run(Thread.java:840)
 dynamodb-local  | 
 dynamodb-local  | Oct 07, 2024 8:25:40 PM com.almworks.sqlite4java.Internal log
 dynamodb-local  | WARNING: [sqlite] SQLiteQueue[shared-local-instance.db]: stopped abnormally, reincarnating in 3000ms
+```
 
+Run the following command in your bash session:
 
 ```bash
 sudo chown -R $user: docker
