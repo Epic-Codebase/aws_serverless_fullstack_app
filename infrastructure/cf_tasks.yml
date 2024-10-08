@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  Domain:
+    Type: String
+    Description: The DNS name of an existing Amazon Route 53 hosted zone
+    AllowedPattern: "(?!-)[a-zA-Z0-9-.]{1,63}(?<!-)"
+    ConstraintDescription: must be a valid DNS zone name.
+Resources:
+  TasksHostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      HostedZoneConfig:
+        HostedZoneConfig
+      Name:
+        Ref: Domain
+Outputs:
+  HostedZoneId:
+    Description: Hosted zone ID
+    Value:
+      Ref: TasksHostedZone
