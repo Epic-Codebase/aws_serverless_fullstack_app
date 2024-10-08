@@ -9,8 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aws-amplify/auth": "^6.5.1",
-    "@aws-amplify/ui-vue": "^4.2.19",
+    "@aws-amplify/auth": "^5.0.5",
+    "@aws-amplify/core": "^5.0.5",
+    "@aws-amplify/ui-vue": "^3.0.4",
+    "aws-amplify": "^5.0.5",
+    "axios": "^1.2.1",
+    "element-plus": "^2.2.26",
+    "sass": "^1.56.2",
+    "sass-loader": "^13.2.0",
     "serverless-s3-sync": "^3.3.0",
     "vue": "^3.2.47"
   },
